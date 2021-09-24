@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Button from './components/Button/button.component'
+import Drum from './components/Drum/index'
+import Numbers from './components/Numbers/index'
+import GeneratedTickets from './components/GeneratedTickets/index'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="bingo-holder">
+        <div className="drum-and-numbers">
+        <Drum />
+        <Numbers/>
+        </div>
+        <div className="generated-tickets">
+          <GeneratedTickets />
+        </div>
+      </div>
     </div>
   );
 }

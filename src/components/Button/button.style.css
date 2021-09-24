@@ -1,0 +1,13 @@
+.button {
+    max-width: 200px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    background: white;
+    color: black;
+    font-size: 19px;
+    cursor: pointer;
+    display: block;
+    margin: 0px auto;
+}
