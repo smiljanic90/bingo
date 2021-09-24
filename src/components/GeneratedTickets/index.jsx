@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './generatedTickets.style.css'
 import GeneratedTicketsPresentation from './generatedTickets.presentation'
 import {MAXX_BALLS, BALLS_OUT} from '../../constants'
+import {generateTicketsForOneRound} from '../../bingo'
 
 const GeneratedTickets = () =>{
 
@@ -20,14 +21,15 @@ const GeneratedTickets = () =>{
         return Array.from(randomSet)
     }
     
-    const generateTicketsForOneRound = (timesRepeat) =>{
-        const tickets = Array.from({length: timesRepeat}, () => generateOneTicket())
-        setTickets(tickets)
+    // promijeniti ime konstante da ne bude isto kao i funkcija
+    const generateTicketsForOneRoundS = (timesRepeat) =>{
+        // const tickets = generateTicketsForOneRound
+        setTickets(generateTicketsForOneRound(timesRepeat))
     }    
 
 
     return(
-            <GeneratedTicketsPresentation generateTicketsForOneRound={generateTicketsForOneRound} tickets={tickets} />
+            <GeneratedTicketsPresentation generateTicketsForOneRound={generateTicketsForOneRoundS} tickets={tickets} />
     )
 }
 

@@ -13,7 +13,7 @@ const generateOneTicket = () => {
     return Array.from(randomSet)
 }
 
-const generateTicketsForOneRound = (timesRepeat) =>{
+export const generateTicketsForOneRound = (timesRepeat) =>{
     return Array.from({length: timesRepeat}, () => generateOneTicket());
 }
 
@@ -86,5 +86,3 @@ function sleep(ms) {
     resolve => setTimeout(resolve, ms) 
   ); 
 }
-
-startRound()
