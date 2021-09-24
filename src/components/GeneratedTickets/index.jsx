@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './generatedTickets.style.css'
 import GeneratedTicketsPresentation from './generatedTickets.presentation'
 import {MAXX_BALLS, BALLS_OUT} from '../../constants'
-import {generateTicketsForOneRound} from '../../bingo'
+import {generateTicketsForOneRound} from '../../bingo-helper'
 
 const GeneratedTickets = () =>{
 
@@ -23,7 +23,6 @@ const GeneratedTickets = () =>{
     
     // promijeniti ime konstante da ne bude isto kao i funkcija
     const generateTicketsForOneRoundS = (timesRepeat) =>{
-        // const tickets = generateTicketsForOneRound
         setTickets(generateTicketsForOneRound(timesRepeat))
     }    
 
