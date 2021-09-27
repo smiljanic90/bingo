@@ -19,3 +19,15 @@
     border-radius: 5px;
     padding: 5px;
 }
+
+.numbers-red {
+    width: 100%;
+    height: auto;
+    border: 1px solid white;
+    background: red;
+    font-size: 24px;
+    max-width: 30px;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+}

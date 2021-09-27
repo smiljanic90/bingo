@@ -1,7 +1,8 @@
 import React from 'react';
 import Button from '../Button/button.component'
+import './generatedTickets.style.css'
 
-const GeneratedTicketsPresentation = ({tickets, generateTicketsForOneRound}) =>{
+const GeneratedTicketsPresentation = ({tickets, generateMultipleTicketsForRound}) =>{
 
     const Ticket = ({numbers}) => {
         return (
@@ -20,7 +21,7 @@ const GeneratedTicketsPresentation = ({tickets, generateTicketsForOneRound}) =>{
             <Button 
                 className="button-start"
                 buttonText="Generate tickets"
-                onClick={() => generateTicketsForOneRound(5)} 
+                onClick={() => generateMultipleTicketsForRound(5)} 
             />
             
                 {tickets.map((x) => {
