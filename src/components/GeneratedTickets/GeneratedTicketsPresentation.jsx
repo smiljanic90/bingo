@@ -2,14 +2,16 @@ import React from 'react';
 import Button from '../Button/button.component'
 import './generatedTickets.style.css'
 
-const GeneratedTicketsPresentation = ({tickets, generateMultipleTicketsForRound}) =>{
+const GeneratedTicketsPresentation = ({tickets, generateMultipleTicketsForRound, izvucenBroj}) =>{
+    let niz = []
+    niz.push(izvucenBroj)
 
     const Ticket = ({numbers}) => {
         return (
             <div className="ticket">
                 <div className="ticket-name"><span>Ticket id: #{numbers}</span></div>
                 <div className="ticket-number">
-                    {numbers.map(number => <span key={number}>{number}</span>)}
+                    {numbers.sort((a, b) => a - b).map(number => <span className={niz[0].includes(number) ? "numbers-generated-red" : 'numbers-generated'} key={number}>{number}</span>)}
                 </div>
         </div>
         )

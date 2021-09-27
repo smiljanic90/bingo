@@ -1,40 +1,25 @@
-
-import React, { useEffect, useRef } from 'react';
-import Button from '../button/Button';
-import CloseIcon from '../CloseIcon';
-import styles from './modal.module.css';
-
-const Modal = ({ modalStyle, children, show, onClose, backdropStyle }) => {
-    const modalRef = useRef(null);
-    useEffect(
-        () => {
-            if (show) {
-                modalRef.current.classList.add(styles.visible);
-            }
-            else {
-                modalRef.current.classList.remove(styles.visible);
-            }
-        },
-        [
-            show
-        ]
-    );
-    return (
-        <React.Fragment>
-            <div ref={modalRef} style={backdropStyle} className={`${styles.modal__wrap}`}>
-                <Button
-                    onClick={onClose}
-                    style={{ width: 60, height: 40, position: 'absolute', top: 0, right: 0, margin: '1rem' }}
-                    className={styles.close__btn}
-                >
-                    <CloseIcon height="20px" width="20px" className={styles.close__icon} />
-                </Button>
-                <div style={modalStyle} className={styles.modal}>
-                    {children}
+import React from 'react';
+ 
+import './modal.style.css';
+ 
+const Modal = ({show, close, text, title}) => {
+return (
+        <div className="modal-intro" style={{display: show ? 'block' : 'none'}}>
+            <div className="modal-wrapper"
+            style={{
+            transform: show ? 'translateY(0vh)' : 'translateY(-100vh)',
+            display: show ? 'block' : 'none'
+            }}>
+                <div className="modal-header">
+                    <h2>{title}</h2>
+                    <span className="close-modal-btn" onClick={close}>×</span>
+                </div>
+            <div className="modal-body">
+                <p>{text}</p>
                 </div>
             </div>
-        </React.Fragment>
-    );
-};
-
+        </div>
+    )
+}
+ 
 export default Modal;
