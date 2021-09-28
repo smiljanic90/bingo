@@ -7,6 +7,8 @@ import DrumPresentation from '../components/Drum/drumPresentation'
 import GeneratedTicketsPresentation from '../components/GeneratedTickets/GeneratedTicketsPresentation'
 import NumbersPresentation from '../components/Numbers/numbersPresentation'
 import Modal from '../components/Modal/modal.component'
+import sadSmiley from '../assets/sad.png'
+import happySmiley from '../assets/happy.png'
 
 const Loto = () =>{
 
@@ -15,6 +17,8 @@ const Loto = () =>{
     const [sviIzvuceniBrojevi, setSviIzvuceniBrojevi] = useState([])
     const [modalVisible, setModalodalVisible] = useState(false)
     const [noWinner, setNoWinner] = useState(false)
+    const [winnerTicket, setWinnerTicket] = useState(false)
+    const [startedGame, setStartedGame] = useState(false)
 
     const openModalHandler = () => {
         setModalodalVisible(!modalVisible)
@@ -25,20 +29,23 @@ const Loto = () =>{
       }
 
     const startRound = async () => {
-        let ticketsForRound = generateTicketsForOneRound(100)
+        let ticketsForRound = tickets
         let izvuceniBrojevi = []
         let brojeviZaBubanj = fillLotoDrumWithBalls(MAXX_BALLS)
         let isWin = false;
         
-        while(brojeviZaBubanj.length > 33 && !isWin) {
+        while(brojeviZaBubanj.length > 14 && !isWin) {
             const broj = getRandomInt(brojeviZaBubanj.length)
             await sleep(2000)
             setIzvucenBroj(brojeviZaBubanj[broj])
             setSviIzvuceniBrojevi(sviIzvuceniBrojevi => [...sviIzvuceniBrojevi, brojeviZaBubanj[broj]])
+            setStartedGame(true)
             izvuceniBrojevi.push(brojeviZaBubanj[broj])
             brojeviZaBubanj.splice(broj, 1)
             const {ticketWin,izvucenaKuglica,isWinner} = checkWinner(ticketsForRound,izvuceniBrojevi)
             if(isWinner){
+                setWinnerTicket(ticketWin)
+                await sleep(1500)
                 openModalHandler()
                 // alert('Winner ticket: ' + ticketWin)
                 isWin = true
@@ -65,7 +72,11 @@ const Loto = () =>{
     return (
         <>
             <div className="drum-and-numbers">
-                <DrumPresentation startRound={startRound} maxBalls={MAXX_BALLS} izvucenBroj={izvucenBroj}/>
+                <DrumPresentation 
+                startRound={startRound} 
+                maxBalls={MAXX_BALLS} 
+                izvucenBroj={izvucenBroj}
+                tickets={tickets}/>
                 <NumbersPresentation allNumbers={ALL_NUMBERS} izvucenBroj={sviIzvuceniBrojevi}/>
             </div>
             <div className="generated-tickets">
@@ -73,6 +84,7 @@ const Loto = () =>{
                 generateMultipleTicketsForRound={generateMultipleTicketsForRound}
                 tickets={tickets}
                 izvucenBroj={sviIzvuceniBrojevi}
+                startedGame={startedGame}
                 />
             </div>
 
@@ -82,8 +94,9 @@ const Loto = () =>{
                 className="modal"
                 show={modalVisible}
                 close={closeModalHandler}
-                text={noWinner ? 'We dont have loto winner in this round' : 'We have a winner'}
-                title={noWinner ? 'Bad luck!' : 'Congratualitions!!!!!'}>
+                text={noWinner ? 'We dont have winner in this round!' : `We have a winner: ${winnerTicket}`}
+                title={noWinner ? 'Bad luck!' : 'Congratulations!!!'}
+                imgSmiley={noWinner ? sadSmiley : happySmiley}>
             </Modal>
         </>
     )

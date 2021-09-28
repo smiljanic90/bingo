@@ -4,34 +4,52 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #fbffe3;
+  background: #0575E6;
+  background: -webkit-linear-gradient(to right, #021B79, #0575E6);
+  background: linear-gradient(to right, #021B79, #0575E6);
 }
 
 .bingo-holder {
   min-height: 50vh;
   display: flex;
   align-items: stretch;
-  justify-content: center;
+  justify-content: space-around;
   font-size: calc(10px + 2vmin);
   color: #34495e;
   width: 100%;
 }
 
 .button-start {
-  background: #34495e!important;
-  color: white!important;
+  max-width: 200px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background: white;
+  color: black;
+  font-size: 19px;
+  cursor: pointer;
+  display: block;
+  margin: 0px auto;
 }
 
 .drum-and-numbers {
-  max-width: 600px;
+  max-width: 800px;
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 .generated-tickets {
-  max-width: 400px;
+  max-width: 270px;
   width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: baseline;
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: white;
 }

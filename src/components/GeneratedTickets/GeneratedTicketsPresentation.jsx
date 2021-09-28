@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../Button/button.component'
 import './generatedTickets.style.css'
 
-const GeneratedTicketsPresentation = ({tickets, generateMultipleTicketsForRound, izvucenBroj}) =>{
+const GeneratedTicketsPresentation = ({tickets, generateMultipleTicketsForRound, izvucenBroj, startedGame}) =>{
     let niz = []
     niz.push(izvucenBroj)
 
@@ -21,6 +21,7 @@ const GeneratedTicketsPresentation = ({tickets, generateMultipleTicketsForRound,
     return(
         <div className="tickets-holder">
             <Button 
+                disabled={startedGame ? true : false}
                 className="button-start"
                 buttonText="Generate tickets"
                 onClick={() => generateMultipleTicketsForRound(5)} 

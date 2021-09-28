@@ -2,7 +2,7 @@ import React from 'react';
  
 import './modal.style.css';
  
-const Modal = ({show, close, text, title}) => {
+const Modal = ({show, close, text, title, imgSmiley}) => {
 return (
         <div className="modal-intro" style={{display: show ? 'block' : 'none'}}>
             <div className="modal-wrapper"
@@ -14,8 +14,9 @@ return (
                     <h2>{title}</h2>
                     <span className="close-modal-btn" onClick={close}>×</span>
                 </div>
-            <div className="modal-body">
-                <p>{text}</p>
+                <div className="modal-body">
+                    <p>{text}</p>
+                    <img src={imgSmiley} />
                 </div>
             </div>
         </div>

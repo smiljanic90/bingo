@@ -6,6 +6,10 @@
     display: block;
 }
 
+.drum-holder p {
+  color: #fff;
+}
+
 .drum-balls {
     max-width: 200px;
     width: 100%;
@@ -17,57 +21,51 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid #34495e;
-    animation-name: transformIn, fadeIn;
-    animation-duration: 1s, 1s;
-    animation-timing-function: ease-in, ease-in;
-    animation-delay: 0, 0, 0;
-    animation-iteration-count: 1;
-    animation-direction: normal, normal;
-    animation-fill-mode: forwards, forwards;
-    animation-play-state: running, running;
+    border: 2px solid #ff0000;
+    position: relative;
 }
 
-.drum-balls-no {
+.drum-balls > .circle {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    margin: auto;
+    border-radius: 100%;
+    box-shadow: 0 1px 0 0 rgba(255, 192, 0, 0.25), 0 -1px 0 0 rgba(255, 64, 0, 0.25), 1px 0 0 0 rgba(255, 192, 0, 0.25), -1px 0 0 0 rgba(255, 64, 0, 0.25), 1px -1px 0 0 rgba(255, 128, 0, 0.5), -1px 1px 0 0 rgba(255, 128, 0, 0.5), 1px 1px 0 0 rgba(255, 255, 0, 0.75), -1px -1px 0 0 rgba(255, 0, 0, 0.75);
     max-width: 200px;
     width: 100%;
     height: 200px;
-    margin: 0px auto;
-    display: block;
-    background: #fcfeff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #34495e;
-    animation-name: transformIn, fadeIn;
-    animation-duration: 1s, 1s;
-    animation-timing-function: ease-in, ease-in;
-    animation-delay: 0, 0, 0;
-    animation-iteration-count: 1;
-    animation-direction: normal, normal;
-    animation-fill-mode: forwards, forwards;
-    animation-play-state: running, running;
-}
+  }
+
+  .drum-balls .circle:nth-of-type(1) {
+    animation: psycho 2s linear infinite;
+  }
+  .drum-balls .circle:nth-of-type(2) {
+    animation: psycho 2s linear 0.1s infinite;
+  }
+  .drum-balls .circle:nth-of-type(3) {
+    animation: psycho 2s linear 0.25s infinite;
+  }
+
+  @keyframes psycho {
+    0% {
+      transform: rotate(0deg) scale(1) translate(0, 0);
+    }
+    33% {
+      transform: rotate(360deg) scale(1) translate(5px, 5px);
+    }
+    66% {
+      transform: rotate(720deg) scale(1) translate(-5px, -5px);
+    }
+    100% {
+      transform: rotate(1080deg) scale(1) translate(0, 0);
+    }
+  }
 
 .balls {
     color: red;
     font-size: 80px;
     font-weight: bold;
-}
-@keyframes transformIn {
-    from {
-        transform: scale(2) rotate(0deg);
-    }
-    to {
-        transform: scale(1) rotate(360deg);
-    }
-}
-@keyframes fadeIn {
-    from {
-        opacity: 0.0;
-    }
-    to {
-        opacity: 1.0;
-    }
 }
