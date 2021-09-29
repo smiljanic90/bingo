@@ -9,7 +9,6 @@ class TicketsStore {
       }
 
       @action getTickets = () => {
-          console.log(this.ticket, 'this.ticket')
         return this.ticket
       }
 }

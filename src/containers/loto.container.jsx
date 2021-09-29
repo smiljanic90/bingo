@@ -88,7 +88,7 @@ const Loto = () =>{
                 startedGame={startedGame}
                 />
 
-            <AddTicket allNumbers={ALL_NUMBERS} />
+            <AddTicket allNumbers={ALL_NUMBERS} izvucenBroj={sviIzvuceniBrojevi} />
             
             </div>
 

@@ -9,9 +9,11 @@ const AddTicketModal = ({allNumbers, show, close, setAddTicketModal, addTicketMo
     niz.push(allNumbers)
     const [choosenNumbers, setChoosenNumbers] = useState([])
 
+    let choosenNumbersArr = []
     const addNumberOnTicket = (number) => {
-        if (choosenNumbers.length <= 6) {
-            setChoosenNumbers(choosenNumbers => [...choosenNumbers, number + `${choosenNumbers.length == 6 ? '' : ' '}`])   
+        
+        if (choosenNumbersArr.length <= 6) {
+            choosenNumbersArr.push(number) 
         } else {
             alert('Maximum number on ticket exceeded')
         }
@@ -20,14 +22,14 @@ const AddTicketModal = ({allNumbers, show, close, setAddTicketModal, addTicketMo
 
     const AllNumberForChoose = ({number}) => {
         return (
-            <div className='numbers-list' onClick={() => addNumberOnTicket(parseInt(number))}>
+            <div className='numbers-list' onClick={() => addNumberOnTicket(Number(number))}>
                 <span>{number}</span>
             </div>
         )
     }
 
     const onConfirm = async () => {
-       await ticketsStore.saveTicket(choosenNumbers)
+            ticketsStore.saveTicket(choosenNumbersArr)
             setAddTicketModal(!addTicketModal)
             setChoosenNumbers([])
             getActiveTickets()

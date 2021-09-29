@@ -6,7 +6,9 @@ import { inject } from "mobx-react";
 import { observer } from "mobx-react-lite";
 import { toJS } from 'mobx';
 
-const AddTicket = ({allNumbers, ticketsStore}) =>{
+const AddTicket = ({allNumbers, ticketsStore, izvucenBroj}) =>{
+    let niz = []
+    niz.push(izvucenBroj)
     const [addTicketModal, setAddTicketModal] = useState(false)
     const [nesto, setNesto] = useState(false)
 
@@ -23,17 +25,15 @@ const AddTicket = ({allNumbers, ticketsStore}) =>{
     })
 
     const {ticket} = ticketsStore
-    const allTickets = toJS(ticket)
 
-    console.log(allTickets, 'allTickets')
 
-    const Ticket = (item) => {
-        console.log(item, 'item')
+    const Ticket = ({item}) => {
         return (
             <div className="ticket">
-                    <div className="ticket-name"><span>Ticket id: #56</span></div>
+                    <div className="ticket-name"><span>Ticket id: #{item}</span></div>
                     <div className="ticket-number">
-                         <span>{item[0]}</span>
+                    {item.sort((a, b) => a - b).map(number => <span className={niz[0].includes(number) ? "numbers-generated-red" : 'numbers-generated'} key={number}>{number}</span>)}
+                         {/* <span>{item[0]}</span> */}
                     </div>
             </div>
         )
@@ -48,8 +48,8 @@ const AddTicket = ({allNumbers, ticketsStore}) =>{
                 onClick={() => setAddTicketModal(true)}
             />
              <div className="tickets-holder">
-                {allTickets.map((item) => {
-                    return <Ticket {...item} />
+                {ticket.map((item) => {
+                    return <Ticket item={item} />
                 })}
             </div>
         </div>
