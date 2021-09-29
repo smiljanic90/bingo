@@ -30,4 +30,6 @@
   background: #cccccc!important;
   color: #666666!important;
   cursor: not-allowed;
+  text-shadow: none;
+  box-shadow: none;
 }

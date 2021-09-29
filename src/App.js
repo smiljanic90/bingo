@@ -8,13 +8,6 @@ function App() {
     <div className="App">
       <div className="bingo-holder">
         <Loto />
-        {/* <div className="drum-and-numbers">
-        <Drum />
-        <Numbers/>
-        </div>
-        <div className="generated-tickets">
-          <GeneratedTickets />
-        </div> */}
       </div>
     </div>
   );

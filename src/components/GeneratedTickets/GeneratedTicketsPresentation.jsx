@@ -19,17 +19,18 @@ const GeneratedTicketsPresentation = ({tickets, generateMultipleTicketsForRound,
 
 
     return(
-        <div className="tickets-holder">
+        <div className='tickets-overview'>
             <Button 
                 disabled={startedGame ? true : false}
                 className="button-start"
                 buttonText="Generate tickets"
                 onClick={() => generateMultipleTicketsForRound(5)} 
             />
-            
+             <div className="tickets-holder">
                 {tickets.map((x) => {
                     return <Ticket key={x} numbers={x} />
                 })}
+                </div>
         </div>
     )
 }

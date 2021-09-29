@@ -9,6 +9,7 @@ import NumbersPresentation from '../components/Numbers/numbersPresentation'
 import Modal from '../components/Modal/modal.component'
 import sadSmiley from '../assets/sad.png'
 import happySmiley from '../assets/happy.png'
+import AddTicket from '../components/AddTicket/addTicket.component'
 
 const Loto = () =>{
 
@@ -86,9 +87,10 @@ const Loto = () =>{
                 izvucenBroj={sviIzvuceniBrojevi}
                 startedGame={startedGame}
                 />
-            </div>
 
-        
+            <AddTicket allNumbers={ALL_NUMBERS} />
+            
+            </div>
 
             <Modal
                 className="modal"
