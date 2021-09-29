@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import './addTicketModal.style.css';
 import Button from '../Button/button.component'
+import { inject } from "mobx-react";
+import { observer } from "mobx-react-lite";
  
-const AddTicketModal = ({allNumbers, show, close, text, title, imgSmiley}) => {
+const AddTicketModal = ({allNumbers, show, close, setAddTicketModal, addTicketModal, title, getActiveTickets, ticketsStore}) => {
     let niz = []
     niz.push(allNumbers)
     const [choosenNumbers, setChoosenNumbers] = useState([])
-
-    console.log(choosenNumbers, 'choosenNumbers')
 
     const addNumberOnTicket = (number) => {
         if (choosenNumbers.length <= 6) {
@@ -26,9 +26,11 @@ const AddTicketModal = ({allNumbers, show, close, text, title, imgSmiley}) => {
         )
     }
 
-    const onConfirm = () => {
-        window.localStorage.setItem('ticket', choosenNumbers);
-        setChoosenNumbers([])
+    const onConfirm = async () => {
+       await ticketsStore.saveTicket(choosenNumbers)
+            setAddTicketModal(!addTicketModal)
+            setChoosenNumbers([])
+            getActiveTickets()
     }
 
 
@@ -64,5 +66,5 @@ return (
         </div>
     )
 }
- 
-export default AddTicketModal;
+
+export default inject("ticketsStore")(observer(AddTicketModal));

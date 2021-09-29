@@ -1,21 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './addTicket.style.css'
 import Button from '../Button/button.component'
 import AddTicketModal from './addTicketModal.component'
+import { inject } from "mobx-react";
+import { observer } from "mobx-react-lite";
+import { toJS } from 'mobx';
 
-const AddTicket = ({allNumbers}) =>{
+const AddTicket = ({allNumbers, ticketsStore}) =>{
     const [addTicketModal, setAddTicketModal] = useState(false)
+    const [nesto, setNesto] = useState(false)
 
     const closeModalHandler = () => {
         setAddTicketModal(!addTicketModal)
     }
 
-    let ticket = window.localStorage.getItem('ticket');
-    let ticketNiz = null;
-    if(ticket){
-        ticketNiz = ticket.split(',').map(function(number) {
-            return parseInt(number);
-        });
+    const getActiveTickets = async () => {
+        await ticketsStore.getTickets()
+    }
+
+    useEffect(() => {
+        getActiveTickets()
+    })
+
+    const {ticket} = ticketsStore
+    const allTickets = toJS(ticket)
+
+    console.log(allTickets, 'allTickets')
+
+    const Ticket = (item) => {
+        console.log(item, 'item')
+        return (
+            <div className="ticket">
+                    <div className="ticket-name"><span>Ticket id: #56</span></div>
+                    <div className="ticket-number">
+                         <span>{item[0]}</span>
+                    </div>
+            </div>
+        )
     }
 
     return (
@@ -27,15 +48,9 @@ const AddTicket = ({allNumbers}) =>{
                 onClick={() => setAddTicketModal(true)}
             />
              <div className="tickets-holder">
-                {/* {tickets.map((x) => {
-                    return <Ticket key={x} numbers={x} />
-                })} */}
-                <div className="ticket">
-                    <div className="ticket-name"><span>Ticket id: #56</span></div>
-                    <div className="ticket-number">
-                        {ticketNiz != null ? ticketNiz.map((x) => <span className='numbers-generated'>{x}</span>) : null}
-                    </div>
-                </div>
+                {allTickets.map((item) => {
+                    return <Ticket {...item} />
+                })}
             </div>
         </div>
 
@@ -44,10 +59,12 @@ const AddTicket = ({allNumbers}) =>{
             title='Add new ticket'
             close={closeModalHandler}
             allNumbers={allNumbers}
+            getActiveTickets={getActiveTickets}
+            setAddTicketModal={setAddTicketModal}
+            addTicketModal={addTicketModal}
         />
     </>
     )
 }
 
-
-export default AddTicket
+export default inject("ticketsStore")(observer(AddTicket));
