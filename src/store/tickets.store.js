@@ -4,12 +4,15 @@ import React from "react";
 class TicketsStore {
     @observable ticket = [];
 
-    @action saveTicket = (tickets) => {
+    @action addNewTicket = (tickets) => {
         this.ticket.push(tickets)
       }
 
-      @action getTickets = () => {
+      @action getAllTickets = () => {
         return this.ticket
+      }
+      @action resetGame = () => {
+        return this.ticket = []
       }
 }
 

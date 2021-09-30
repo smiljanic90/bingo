@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../Button/button.component'
 import './generatedTickets.style.css'
 
-const GeneratedTicketsPresentation = ({tickets, generateMultipleTicketsForRound, izvucenBroj, startedGame}) =>{
+const GeneratedTicketsPresentation = ({generatedTickets, generateMultipleTicketsForRound, izvucenBroj, startedGame}) =>{
     let niz = []
     niz.push(izvucenBroj)
 
@@ -27,7 +27,7 @@ const GeneratedTicketsPresentation = ({tickets, generateMultipleTicketsForRound,
                 onClick={() => generateMultipleTicketsForRound(5)} 
             />
              <div className="tickets-holder">
-                {tickets.map((x) => {
+                {generatedTickets.map((x) => {
                     return <Ticket key={x} numbers={x} />
                 })}
                 </div>

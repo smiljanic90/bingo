@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Button from './components/Button/button.component'
 import Loto from './containers/loto.container'
 
 function App() {

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import './generatedTickets.style.css'
-// import GeneratedTicketsPresentation from './generatedTickets.presentation'
 import {MAXX_BALLS, ALL_NUMBERS} from '../constants'
 import {generateTicketsForOneRound, checkWinner, getRandomInt,fillLotoDrumWithBalls} from '../bingo-helper'
 import DrumPresentation from '../components/Drum/drumPresentation'
@@ -10,10 +8,13 @@ import Modal from '../components/Modal/modal.component'
 import sadSmiley from '../assets/sad.png'
 import happySmiley from '../assets/happy.png'
 import AddTicket from '../components/AddTicket/addTicket.component'
+import { inject } from "mobx-react";
+import { observer } from "mobx-react-lite";
 
-const Loto = () =>{
+const Loto = ({ticketsStore}) =>{
 
     const [tickets, setTickets] = useState([])
+    const [generatedTickets, setGeneratedTickets] = useState([])
     const [izvucenBroj, setIzvucenBroj] = useState('--')
     const [sviIzvuceniBrojevi, setSviIzvuceniBrojevi] = useState([])
     const [modalVisible, setModalodalVisible] = useState(false)
@@ -28,6 +29,16 @@ const Loto = () =>{
     const closeModalHandler = () => {
         setModalodalVisible(!modalVisible)
       }
+
+    const resetGame = () =>{
+        setTickets([])
+        setGeneratedTickets([])
+        setIzvucenBroj('--')
+        setModalodalVisible(!modalVisible)
+        setStartedGame(false)
+        setSviIzvuceniBrojevi([])
+        ticketsStore.resetGame()
+    }
 
     const startRound = async () => {
         let ticketsForRound = tickets
@@ -48,7 +59,6 @@ const Loto = () =>{
                 setWinnerTicket(ticketWin)
                 await sleep(1500)
                 openModalHandler()
-                // alert('Winner ticket: ' + ticketWin)
                 isWin = true
             }
         }
@@ -68,6 +78,7 @@ const Loto = () =>{
 
     const generateMultipleTicketsForRound = (timesRepeat) =>{
         setTickets(generateTicketsForOneRound(timesRepeat))
+        setGeneratedTickets(generateTicketsForOneRound(timesRepeat))
     }   
 
     return (
@@ -80,16 +91,22 @@ const Loto = () =>{
                 tickets={tickets}/>
                 <NumbersPresentation allNumbers={ALL_NUMBERS} izvucenBroj={sviIzvuceniBrojevi}/>
             </div>
-            <div className="generated-tickets">
-            <GeneratedTicketsPresentation
-                generateMultipleTicketsForRound={generateMultipleTicketsForRound}
-                tickets={tickets}
-                izvucenBroj={sviIzvuceniBrojevi}
-                startedGame={startedGame}
-                />
 
-            <AddTicket allNumbers={ALL_NUMBERS} izvucenBroj={sviIzvuceniBrojevi} />
-            
+            <div className="generated-tickets">
+                <GeneratedTicketsPresentation
+                    generateMultipleTicketsForRound={generateMultipleTicketsForRound}
+                    generatedTickets={generatedTickets}
+                    izvucenBroj={sviIzvuceniBrojevi}
+                    startedGame={startedGame}
+                    />
+
+                <AddTicket 
+                    allNumbers={ALL_NUMBERS} 
+                    izvucenBroj={sviIzvuceniBrojevi} 
+                    startedGame={startedGame}
+                    tickets={tickets}
+                    setTickets={setTickets}
+                />
             </div>
 
             <Modal
@@ -98,11 +115,11 @@ const Loto = () =>{
                 close={closeModalHandler}
                 text={noWinner ? 'We dont have winner in this round!' : `We have a winner: ${winnerTicket}`}
                 title={noWinner ? 'Bad luck!' : 'Congratulations!!!'}
-                imgSmiley={noWinner ? sadSmiley : happySmiley}>
+                imgSmiley={noWinner ? sadSmiley : happySmiley}
+                resetGame={resetGame}>
             </Modal>
         </>
     )
 }
 
-
-export default Loto
+export default inject("ticketsStore")(observer(Loto));
