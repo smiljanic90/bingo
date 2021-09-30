@@ -50,11 +50,12 @@ const Loto = ({ticketsStore}) =>{
         let brojeviZaBubanj = fillLotoDrumWithBalls(MAXX_BALLS)
         let isWin = false;
 
-        console.log(ticketsForRound, 'ticketsForRound')
+        // console.log(ticketsForRound, 'ticketsForRound')
+
         
-        while(brojeviZaBubanj.length > 14 && !isWin) {
+        while(brojeviZaBubanj.length > 2 && !isWin) {
             const broj = getRandomInt(brojeviZaBubanj.length)
-            await sleep(2000)
+            await sleep(200)
             setIzvucenBroj(brojeviZaBubanj[broj])
             setSviIzvuceniBrojevi(sviIzvuceniBrojevi => [...sviIzvuceniBrojevi, brojeviZaBubanj[broj]])
             setStartedGame(true)

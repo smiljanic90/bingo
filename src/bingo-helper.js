@@ -41,6 +41,7 @@ const checkTicket = (ticketOne, lotoNumbers) =>{
 }
 
 export const checkWinner = (ticketsAll, lotoNumbers) =>{
+    // console.log(ticketsAll, 'ticketsAll')
      for(let i = 0; i < ticketsAll.length; i++){
          if(checkTicket(ticketsAll[i], lotoNumbers)){
              return {
