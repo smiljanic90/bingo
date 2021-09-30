@@ -41,10 +41,16 @@ const Loto = ({ticketsStore}) =>{
     }
 
     const startRound = async () => {
-        let ticketsForRound = tickets
+        let arrayOfAllTickets = []
+        generatedTickets.forEach(x => arrayOfAllTickets.push(x))
+        tickets.forEach(x => arrayOfAllTickets.push(x))
+
+        let ticketsForRound = arrayOfAllTickets
         let izvuceniBrojevi = []
         let brojeviZaBubanj = fillLotoDrumWithBalls(MAXX_BALLS)
         let isWin = false;
+
+        console.log(ticketsForRound, 'ticketsForRound')
         
         while(brojeviZaBubanj.length > 14 && !isWin) {
             const broj = getRandomInt(brojeviZaBubanj.length)
@@ -76,9 +82,8 @@ const Loto = ({ticketsStore}) =>{
         ); 
       }
 
-    const generateMultipleTicketsForRound = (timesRepeat) =>{
-        setTickets(generateTicketsForOneRound(timesRepeat))
-        setGeneratedTickets(generateTicketsForOneRound(timesRepeat))
+    const generateMultipleTicketsForRound = async (timesRepeat) =>{
+        await setGeneratedTickets(generateTicketsForOneRound(timesRepeat))
     }   
 
     return (
