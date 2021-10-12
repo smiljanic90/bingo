@@ -55,6 +55,7 @@ const Loto = ({ticketsStore}) =>{
             await sleep(1000)
             setIzvucenBroj(brojeviZaBubanj[broj])
             setSviIzvuceniBrojevi(sviIzvuceniBrojevi => [...sviIzvuceniBrojevi, brojeviZaBubanj[broj]])
+            console.log(arrayOfAllTickets, 'arrayOfAllTickets')
             setStartedGame(true)
             izvuceniBrojevi.push(brojeviZaBubanj[broj])
             brojeviZaBubanj.splice(broj, 1)
