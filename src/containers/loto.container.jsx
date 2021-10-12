@@ -44,15 +44,14 @@ const Loto = ({ticketsStore}) =>{
         let arrayOfAllTickets = []
         generatedTickets.forEach(x => arrayOfAllTickets.push(x))
         tickets.forEach(x => arrayOfAllTickets.push(x))
-
-        let ticketsForRound = arrayOfAllTickets
-        let izvuceniBrojevi = []
+        
+        let izvuceniBrojevi = new Array()
         let brojeviZaBubanj = fillLotoDrumWithBalls(MAXX_BALLS)
         let isWin = false;
 
         while(brojeviZaBubanj.length > 5 && !isWin) {
             const broj = getRandomInt(brojeviZaBubanj.length)
-            await sleep(1000)
+            await sleep(500)
             setIzvucenBroj(brojeviZaBubanj[broj])
             setSviIzvuceniBrojevi(sviIzvuceniBrojevi => [...sviIzvuceniBrojevi, brojeviZaBubanj[broj]])
             console.log(arrayOfAllTickets, 'arrayOfAllTickets')
