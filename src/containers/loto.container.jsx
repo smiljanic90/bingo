@@ -50,15 +50,15 @@ const Loto = ({ticketsStore}) =>{
         let brojeviZaBubanj = fillLotoDrumWithBalls(MAXX_BALLS)
         let isWin = false;
 
-        while(brojeviZaBubanj.length > 14 && !isWin) {
+        while(brojeviZaBubanj.length > 5 && !isWin) {
             const broj = getRandomInt(brojeviZaBubanj.length)
-            await sleep(2000)
+            await sleep(1000)
             setIzvucenBroj(brojeviZaBubanj[broj])
             setSviIzvuceniBrojevi(sviIzvuceniBrojevi => [...sviIzvuceniBrojevi, brojeviZaBubanj[broj]])
             setStartedGame(true)
             izvuceniBrojevi.push(brojeviZaBubanj[broj])
             brojeviZaBubanj.splice(broj, 1)
-            const {ticketWin,izvucenaKuglica,isWinner} = checkWinner(ticketsForRound,izvuceniBrojevi)
+            const {ticketWin,izvucenaKuglica,isWinner} = checkWinner(arrayOfAllTickets,izvuceniBrojevi)
             if(isWinner){
                 setWinnerTicket(ticketWin)
                 await sleep(1500)
@@ -91,7 +91,8 @@ const Loto = ({ticketsStore}) =>{
                 startRound={startRound} 
                 maxBalls={MAXX_BALLS} 
                 izvucenBroj={izvucenBroj}
-                tickets={tickets}/>
+                tickets={tickets}
+                generatedTickets={generatedTickets}/>
                 <NumbersPresentation allNumbers={ALL_NUMBERS} izvucenBroj={sviIzvuceniBrojevi}/>
             </div>
 

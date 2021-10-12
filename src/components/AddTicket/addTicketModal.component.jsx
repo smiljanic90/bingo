@@ -21,17 +21,21 @@ const AddTicketModal = ({
     const [choosenNumbers, setChoosenNumbers] = useState([])
 
     const addNumberOnTicket = (number) => {
-        if (choosenNumbers.length <= 6) {
-            setChoosenNumbers([...choosenNumbers, Number(number)])
-        } else {
-            alert('Maximum number on ticket exceeded')
+        if (choosenNumbers.includes(number)) {
+            alert('Number already exist on ticket')
+        }   else {
+            if (choosenNumbers.length <= 6) {
+                setChoosenNumbers([...choosenNumbers, Number(number)])
+            } else {
+                alert('Maximum number on ticket exceeded')
+            }
         }
         
     }
 
     const AllNumberForChoose = ({number}) => {
         return (
-            <div className='numbers-list' onClick={() => addNumberOnTicket(Number(number))}>
+            <div className={choosenNumbers.includes(number) ? 'numbers-list-red' : 'numbers-list'} onClick={() => addNumberOnTicket(Number(number))}>
                 <span>{number}</span>
             </div>
         )
