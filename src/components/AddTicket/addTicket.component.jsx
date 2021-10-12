@@ -16,9 +16,11 @@ const AddTicket = ({
     let niz = []
     niz.push(izvucenBroj)
     const [addTicketModal, setAddTicketModal] = useState(false)
+    const [choosenNumbers, setChoosenNumbers] = useState([])
 
     const closeModalHandler = () => {
         setAddTicketModal(!addTicketModal)
+        setChoosenNumbers([])
     }
 
     const getActiveTickets = async () => {
@@ -67,6 +69,8 @@ const AddTicket = ({
                 addTicketModal={addTicketModal}
                 tickets={tickets}
                 setTickets={setTickets}
+                setChoosenNumbers={setChoosenNumbers}
+                choosenNumbers={choosenNumbers}
             />
         </>
     )

@@ -15,10 +15,11 @@ const AddTicketModal = ({
     addTicketModal, 
     title, 
     getActiveTickets, 
-    ticketsStore}) => {
+    ticketsStore,
+    choosenNumbers,
+    setChoosenNumbers}) => {
     let niz = []
     niz.push(allNumbers)
-    const [choosenNumbers, setChoosenNumbers] = useState([])
 
     const addNumberOnTicket = (number) => {
         if (choosenNumbers.includes(number)) {
